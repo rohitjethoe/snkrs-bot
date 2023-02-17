@@ -1,5 +1,8 @@
 <template>
   <div class="topbar">
+    <div class="current-page">
+        {{currentPage}}
+    </div>
     <div class="time">{{currentTime}}</div>
   </div>
 </template>
@@ -11,6 +14,9 @@ export default {
         return {
             currentTime: ''
         }
+    },
+    props: {
+        currentPage: String
     },
     methods: {
         getCurrentTime: function () {
@@ -39,12 +45,23 @@ export default {
         -webkit-app-region: drag;
         -webkit-user-select: none;
         user-select: none;
-        text-align: right;
         color: #fff;
         font-size: 12px;
         padding: 8px;
+        .current-page {
+            float: left;
+            margin-left: 84px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
         .time {
+            float: right;
             padding: 0px 10px;
         }
+    }
+    .topbar::after {
+        clear: both;
+        content: "";
+        display: table;
     }
 </style>

@@ -1,0 +1,16 @@
+{
+    "nl": {
+        "home": {
+            "header": { 
+                "title": "Welkom bij NIKE SWIFT 🚀",
+                "subtitle": "Hulp nodig? Zie in het menu."
+            }
+        }
+    },
+    "en": {
+        "home": {
+            "header": "Welcome to NIKE SWIFT 🚀",
+            "subtitle": "Need help? See in the navigation."
+        }
+    }
+}

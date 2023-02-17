@@ -10,3 +10,11 @@
 header {
     float: left;
 }
+
+.content {
+    float: right;
+}
+
+body {
+    overflow: hidden;
+}

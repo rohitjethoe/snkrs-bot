@@ -128,6 +128,8 @@ export default {
       margin: 0px auto;
       padding: 10px 0px;
       li {
+        -webkit-user-select: none;
+        user-select: none;
         color: #fff;
         height: 24px;
         width: 48px;
