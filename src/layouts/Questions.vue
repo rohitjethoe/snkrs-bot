@@ -1,12 +1,12 @@
 <template>
-  <div id="account">
+  <div id="questions">
     <h1>Coming soon...</h1>
   </div>
 </template>
 
 <script>
 export default {
-    name: "AccountLayout"
+  name: "QuestionsLayout"
 }
 </script>
 

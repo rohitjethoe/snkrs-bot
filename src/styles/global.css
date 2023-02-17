@@ -15,6 +15,7 @@ header {
     float: right;
 }
 
-body {
-    overflow: hidden;
+html {
+    overflow-y: hidden;
 }
+

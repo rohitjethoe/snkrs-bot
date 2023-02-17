@@ -14,10 +14,14 @@
             v-if="navigationData.currentPage == 'Home'" 
           />
           <Calendar 
+            :data="calendarData.data"
             v-if="navigationData.currentPage == 'Calendar'"
           />
           <Account 
             v-if="navigationData.currentPage == 'Account'"
+          />
+          <Questions 
+            v-if="navigationData.currentPage == 'Questions'"
           />
       </div>
     </main>
@@ -25,17 +29,21 @@
 </template>
 
 <script>
+import calendarModule from '@/modules/calendar/main';
+
 import Topbar from '@/components/Topbar.vue'
 import Navigation from '@/components/Navigation.vue'
 
 import Home from '@/layouts/Home.vue'
 import Account from '@/layouts/Account.vue'
 import Calendar from '@/layouts/Calendar.vue'
+import Questions from '@/layouts/Questions.vue'
 
 export default {
   name: 'App',
   data() {
     return {
+      calendarData: [],
       navigationData: {
         currentPage: "Home",
         pages: {
@@ -60,12 +68,19 @@ export default {
     }
   },
   components: {
-    Navigation, Topbar, Home, Account, Calendar
+    Navigation, Topbar, Home, Account, Calendar, Questions
   },
   methods: {
     switchCurrentPageData: function (page) {
       this.navigationData.currentPage = page;
+    },
+
+    fetchCalendarData: async function () {
+        this.calendarData = await calendarModule.fetchData('NL', 'nl');
     }
+  },
+  created() {
+    this.fetchCalendarData();
   }
 }
 </script>
