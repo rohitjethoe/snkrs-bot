@@ -14,6 +14,16 @@
                 {{content.price}}
             </div>
         </div>
+        <div class="card-sizes">
+            <div 
+                v-for="size in content.sizes"
+                v-bind:key="size"
+                class="size"
+                :class="size.stock"
+            >
+                    {{ size.id }}
+            </div>
+        </div>
     </div>
   </div>
 </template>
@@ -26,7 +36,8 @@ export default {
             content: {
                 image: this.cardData.models[0].imageURL,
                 title: `${this.cardData.title} ${this.cardData.models[0].modelName}`,
-                price: `${this.cardData.models[0].currency} ${this.cardData.models[0].price}`
+                price: `${this.cardData.models[0].currency} ${this.cardData.models[0].price}`,
+                sizes: []
             }
         }
     },
@@ -34,6 +45,26 @@ export default {
         cardData: JSON
     },
     methods: {
+        getStockData: function () {
+            for (const size of this.cardData.models[0].sizes) {
+                const sizeTag = Object.keys(size)[0];
+                const sizeKey = size[sizeTag];
+                console.log(sizeKey);
+                for (const stock of this.cardData.models[0].stock) {
+                    if (Object.keys(stock)[0] == sizeKey) {
+                        const size = {
+                            id: sizeTag.replace("_", "."),
+                            stock: stock[sizeKey]
+                        }
+
+                        this.content.sizes.push(size)
+                    }
+                }
+            }
+        }
+    },
+    mounted() {
+        this.getStockData();
     }
 }
 </script>
@@ -41,43 +72,66 @@ export default {
 <style lang="scss" scoped>
     .card {
         width: 120px;
+        max-height: 400px;
         .card-image {
             img.card-image-main {
-                width: 100%;
+                width: 120px;
+                height: 120px;
                 border-top-left-radius: 8px;
                 border-top-right-radius: 8px;
             }
         }
         .card-content {
-            background-color: #29292f;
-            transition: 0.5s;
-            color: #fff;
-            padding: 10px;
-            padding-top: 2px;
+            width: 100px;
+            background-color: #29292F;
             border-bottom-left-radius: 8px;
             border-bottom-right-radius: 8px;
-            height: 100px;
-            -webkit-user-select: none;
-            user-select: none;
+            color: #fff;
+            padding: 8px 10px;
             .card-title {
+                padding: 2px 0px;
                 h2 {
+                    font-size: 10px;
+                    height: 50px;
                     font-weight: 400;
-                    font-size: 12px;
                 }
+                
             }
             .card-data {
-                margin: 4px 0px;
+                padding: 2px 0px;
                 .card-data-price {
-                    font-size: 12px;
-                    font-weight: 700;
+                    font-size: 10px;
+                    font-weight: 600;
                 }
             }
-        }
-    }
-    .card:hover {
-        cursor: pointer;
-        .card-content {
-            background-color: #333;
+            .card-sizes {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                padding: 10px 0px;
+                .size {
+                    background-color: #222;
+                    font-size: 10px;
+                    width: 20px;
+                    height: 20px;
+                    padding: 2px;
+                    font-weight: 600;
+                    text-align: center;
+                    border-radius: 4px;
+                }
+                .HIGH {
+                    background-color: #2db66b;
+                }
+                .LOW {
+                    background-color: #b62d2d
+                }
+                .MEDIUM {
+                    background-color: #e1af19
+                }
+                .OOS {
+                    display: none;
+                }
+            }
         }
     }
 </style>

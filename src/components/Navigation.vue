@@ -25,7 +25,7 @@
             <i class="fa-solid fa-check"></i>
           </li>
           <li>
-            <span>1.0.0</span>
+            <span>0.9.1</span>
           </li>
         </ul>
       </div>

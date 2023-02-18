@@ -1,39 +1,16 @@
 <template>
   <div id="calendar">
     <div class="header">
-      <h1>Upcoming items for NL</h1>
-      <p>{{Object.keys(data).length}} items found</p>
+      <h1>Upcoming calendar loaded for NL</h1>
+      <p>{{Object.keys(data).length}} products loaded</p>
     </div>
     <div class="cards" v-if="Object.keys(data).length > 0">
       <CalendarCard 
-        @click="changeStockData(0)"
-        :cardData="data[0]"
-      />
-      <CalendarCard 
-        @click="changeStockData(1)"
-        :cardData="data[1]"
-      />
-      <CalendarCard 
-        @click="changeStockData(2)"
-        :cardData="data[2]"
-      />
-      <CalendarCard 
-        @click="changeStockData(3)"
-        :cardData="data[3]"
-      />
-      <CalendarCard 
-        @click="changeStockData(4)"
-        :cardData="data[4]"
-      />
-      <CalendarCard 
-        @click="changeStockData(5)"
-        :cardData="data[5]"
+        v-for="item in data"
+        v-bind:key="item"
+        :cardData="item"
       />
     </div>
-<!-- Coming Soon...    
-    <div class="stock">
-        {{data[stockModel].models[0]}}
-    </div> -->
   </div>
 </template>
 
@@ -82,6 +59,7 @@ export default {
     .cards {
       display: flex;
       gap: 16px;
+      overflow-x: scroll;
     }
   }
 </style>
